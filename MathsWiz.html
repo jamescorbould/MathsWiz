@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Maths Wiz App</title>
+</head>
+
+<body onload="generateQuestion();">
+    <script>
+        var score = 0;
+        var daddyScore = 0;
+        var daddyScoreCount = 0;
+        var daddyScoreIncrement = 5;
+        var calculatedAnswer = 0;
+
+        function checkAnswer()
+        {
+            var answer = document.forms["form"]["answer"].value;
+
+            if (answer == calculatedAnswer)
+            {
+                document.getElementById("result").innerHTML = "Correct!";
+
+                score++;
+                daddyScoreCount++;
+
+                if (daddyScoreCount == daddyScoreIncrement)
+                {
+                    alert("Well done you earned a Daddy point!!");
+
+                    daddyScore++;
+                    daddyScoreCount = 0;
+                }
+            }
+            else
+            {
+                document.getElementById("result").innerHTML = "Sorry that's incorrect!  The correct answer is " + calculatedAnswer + ".";
+            }
+
+            generateQuestion();
+
+            return false;
+        }
+
+        function generateQuestion()
+        {
+            var lhs = Math.floor(Math.random() * 12) + 1;
+            var rhs = Math.floor(Math.random() * 12) + 1;
+            calculatedAnswer = lhs * rhs;
+
+            document.getElementById("question").innerHTML = lhs + " x " + rhs;
+            document.getElementById("score").innerHTML = "Score: " + score;
+            document.getElementById("daddyScore").innerHTML = "Daddy Points: " + daddyScore;
+        }
+    </script>
+    <div>
+        <h1>Maths Wiz</h1>
+    </div>
+    <div>
+        <p id="question">Calculate:</p>
+    </div>
+    <div>
+        <form name="form" action="#" onsubmit="return checkAnswer();generateQuestion();">
+            <div>
+                <label for="answer">Answer:</label>
+                <input type="text" name="answer" id="answer" required>
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+    <div>
+        <p id="result"></p>
+        <p id="score">Score:</p>
+        <p id="daddyScore">Daddy Points:</p>
+    </div>
+</body>
+
+</html>

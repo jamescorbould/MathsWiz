@@ -23,6 +23,8 @@ function checkAnswer() {
     else {
         document.getElementById("result").innerHTML = "Sorry that's incorrect!  The correct answer is " + calculatedAnswer + ".";
     }
+    
+    document.forms["form"]["answer"].value = '';
 
     generateQuestion();
 
